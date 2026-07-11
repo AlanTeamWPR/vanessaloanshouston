@@ -185,10 +185,19 @@
   footer .legal{border-top:1px solid rgba(255,255,255,0.12);padding-top:16px;font-size:11.5px;color:#8894A0;}
 
   /* AI Chat widget */
-  #chat-launcher{position:fixed;bottom:24px;right:24px;background:linear-gradient(135deg,var(--sun),var(--coral));color:white;border:none;border-radius:30px;padding:14px 20px;font-weight:bold;font-size:14px;box-shadow:0 8px 24px rgba(255,107,93,0.4);z-index:100;display:flex;align-items:center;gap:8px;}
+  #chat-launcher{position:fixed;bottom:24px;right:24px;background:linear-gradient(135deg,var(--sun),var(--coral));color:white;border:none;border-radius:30px;padding:10px 20px 10px 10px;font-weight:bold;font-size:14px;box-shadow:0 8px 24px rgba(255,107,93,0.4);z-index:100;display:flex;align-items:center;gap:10px;animation:launcherPulse 2.6s ease-in-out infinite;}
+  #chat-launcher .bonks-avatar{width:36px;height:36px;border-radius:50%;background:white;flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:2px;}
+  #chat-launcher .bonks-avatar svg{width:100%;height:100%;}
+  @keyframes launcherPulse{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
+  #chat-bubble-tip{position:fixed;bottom:96px;right:24px;background:white;border-radius:16px 16px 4px 16px;box-shadow:0 10px 30px rgba(0,0,0,0.2);padding:12px 14px;font-size:13px;color:var(--ink);max-width:220px;z-index:99;display:none;}
+  #chat-bubble-tip.show{display:block;animation:tipPop .3s ease;}
+  @keyframes tipPop{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
   #chat-panel{position:fixed;bottom:90px;right:24px;width:340px;max-width:90vw;height:440px;background:white;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,0.25);z-index:100;display:none;flex-direction:column;overflow:hidden;}
   #chat-panel.open{display:flex;}
-  .chat-head{background:linear-gradient(135deg,var(--sky-deep),var(--sky));color:white;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;}
+  .chat-head{background:linear-gradient(135deg,var(--sky-deep),var(--sky));color:white;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;}
+  .chat-head .head-left{display:flex;align-items:center;gap:10px;}
+  .chat-head .bonks-avatar{width:38px;height:38px;border-radius:50%;background:white;flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:3px;}
+  .chat-head .bonks-avatar svg{width:100%;height:100%;}
   .chat-head div strong{display:block;font-size:14px;}
   .chat-head div span{font-size:11.5px;color:#E4F3FF;}
   .chat-head button{background:none;border:none;color:white;font-size:18px;}
@@ -684,14 +693,39 @@
 </footer>
 
 <!-- AI CHAT WIDGET -->
-<button id="chat-launcher" onclick="toggleChat()">💬 Ask Vanessa's Assistant</button>
+<!-- Loan Bonks mascot, defined once, reused via <use> -->
+<svg width="0" height="0" style="position:absolute;">
+  <symbol id="bonks-svg" viewBox="0 0 60 60">
+    <circle cx="12" cy="15" r="6" fill="#2C3E63"/>
+    <circle cx="48" cy="15" r="6" fill="#2C3E63"/>
+    <circle cx="30" cy="20" r="11" fill="#FFDDBB" stroke="#223047" stroke-width="2"/>
+    <circle cx="26" cy="19" r="1.6" fill="#223047"/>
+    <circle cx="34" cy="19" r="1.6" fill="#223047"/>
+    <path d="M25 25 Q30 29 35 25" stroke="#223047" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <line x1="30" y1="31" x2="30" y2="42" stroke="#223047" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="30" y1="35" x2="17" y2="28" stroke="#223047" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="30" y1="35" x2="43" y2="28" stroke="#223047" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M21 42 L39 42 L43 55 L17 55 Z" fill="#FF9A2E"/>
+    <line x1="26" y1="55" x2="24" y2="59" stroke="#223047" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="34" y1="55" x2="36" y2="59" stroke="#223047" stroke-width="2.5" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<button id="chat-launcher" onclick="toggleChat()">
+  <span class="bonks-avatar"><svg><use href="#bonks-svg"/></svg></span>
+  Chat with Loan Bonks
+</button>
+<div id="chat-bubble-tip" onclick="toggleChat(true)">👋 Hi, I'm <strong>Loan Bonks</strong>! Got a sec to talk loans?</div>
 <div id="chat-panel">
   <div class="chat-head">
-    <div><strong>Vanessa's Assistant</strong><span>Usually replies instantly</span></div>
+    <div class="head-left">
+      <span class="bonks-avatar"><svg><use href="#bonks-svg"/></svg></span>
+      <div><strong>Loan Bonks</strong><span>Vanessa's AI sidekick · usually instant</span></div>
+    </div>
     <button onclick="toggleChat(false)">✕</button>
   </div>
   <div class="chat-body" id="chat-body">
-    <div class="msg bot">Hi! I'm Vanessa's AI assistant — not Vanessa herself, but I can answer questions, help you pre-qualify, or explain the agent partner program. What brings you by?</div>
+    <div class="msg bot">Hi there! 👋 I'm <strong>Loan Bonks</strong> — Vanessa's AI sidekick. Not Vanessa herself, but I can answer questions, help you pre-qualify, or explain the agent partner program. What brings you by?</div>
   </div>
   <div class="chip-row" id="chip-row">
     <button class="chip" onclick="chatQuick('programs')">What loan programs exist?</button>
@@ -813,12 +847,32 @@ function calcRentBuy(){
 }
 
 /* Chat widget */
-function toggleChat(force, intent){
+let chatUserInteracted = false;
+function toggleChat(force, intent, isAuto){
+  if(!isAuto) chatUserInteracted = true;
   const panel = document.getElementById('chat-panel');
   const open = force===undefined ? !panel.classList.contains('open') : force;
   panel.classList.toggle('open', open);
+  const launcher = document.getElementById('chat-launcher');
+  if(launcher) launcher.style.animation = 'none';
+  const tip = document.getElementById('chat-bubble-tip');
+  if(tip) tip.classList.remove('show');
   if(open && intent) chatQuick(intent);
 }
+
+/* Loan Bonks proactively pops up and starts the conversation if the visitor hasn't engaged yet */
+function initBonksAutoPopup(){
+  setTimeout(()=>{
+    if(chatUserInteracted) return;
+    const tip = document.getElementById('chat-bubble-tip');
+    if(tip) tip.classList.add('show');
+  }, 2200);
+  setTimeout(()=>{
+    if(chatUserInteracted) return;
+    toggleChat(true, null, true);
+  }, 6500);
+}
+window.addEventListener('load', initBonksAutoPopup);
 function addMsg(text, who){
   const body = document.getElementById('chat-body');
   const div = document.createElement('div');
