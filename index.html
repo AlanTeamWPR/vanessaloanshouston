@@ -67,6 +67,12 @@
   .btn-green{background:var(--green);color:white;box-shadow:0 8px 20px rgba(47,163,107,0.3);}
   .hero-photo{background:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.9);border-radius:var(--radius);padding:22px;backdrop-filter:blur(3px);box-shadow:var(--shadow);}
   .avatar-placeholder{width:100%;aspect-ratio:4/3;border-radius:12px;background:linear-gradient(135deg,#FFE29A,#FF9A2E);display:flex;align-items:center;justify-content:center;color:white;font-size:15px;text-align:center;padding:20px;font-weight:bold;text-shadow:0 1px 3px rgba(0,0,0,0.15);}
+  .avatar-photo{width:100%;aspect-ratio:4/3;border-radius:12px;object-fit:cover;object-position:center 15%;display:block;}
+  .community-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px;}
+  .community-gallery figure{margin:0;background:white;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
+  .community-gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+  .community-gallery figcaption{font-size:12px;color:var(--slate);padding:8px 10px;}
+  @media (max-width: 700px){ .community-gallery{grid-template-columns:1fr 1fr;} }
 
   .trust-bar{background:var(--white);border-top:1px solid #FFEBC2;border-bottom:1px solid #FFEBC2;}
   .trust-inner{display:flex;justify-content:space-between;flex-wrap:wrap;gap:18px;padding:18px 0;color:var(--slate);font-size:13.5px;}
@@ -260,7 +266,7 @@
           </div>
         </div>
         <div class="hero-photo">
-          <div class="avatar-placeholder">[ Photo of Vanessa Martinez ]<br>Real headshot goes here</div>
+          <img class="avatar-photo" src="images/vanessa-hero.jpg" alt="Vanessa Martinez">
         </div>
       </div>
     </div>
@@ -620,7 +626,15 @@
         <p>Outside of lending, Vanessa volunteers with local first-time homebuyer education programs and coaches youth soccer in Katy, TX.</p>
       </div>
       <div class="hero-photo" style="background:white;border-color:#EEE;">
-        <div class="avatar-placeholder">[ Photo of Vanessa Martinez ]</div>
+        <img class="avatar-photo" src="images/vanessa-hero.jpg" alt="Vanessa Martinez">
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="section-head" style="margin-top:30px;"><small>Life Outside the Office</small><h2>Community, family, and a little friendly competition</h2></div>
+      <div class="community-gallery">
+        <figure><img src="images/community-family.jpg" alt="Vanessa with family"><figcaption>Time with family — the "why" behind the work.</figcaption></figure>
+        <figure><img src="images/community-beach.jpg" alt="Vanessa at the beach"><figcaption>Off the clock, still smiling.</figcaption></figure>
+        <figure><img src="images/community-friends.jpg" alt="Vanessa with friends"><figcaption>Out and about with friends around Houston.</figcaption></figure>
       </div>
     </div>
   </section>
